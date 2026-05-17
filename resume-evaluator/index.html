@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Evaluator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   <header>
+    <h1>Resume Evaluator</h1>
+        <nav>
+            <a href="#">Login</a>
+            <a href="#">Register</a>
+        </nav>
+   </header> 
+   <main>
+    <form method="post" id="form">
+        <label for="job"> job description</label>
+            <textarea rows="2" cols="10" name="job" id="job"></textarea>
+
+        <label for="prompt">Custom Prompt</label>
+            <textarea rows="2" cols="60" name="prompt" id="prompt"></textarea>
+
+        <label for="cv">Upload your CV</label>
+            <input type="file" accept=".pdf" name="cv" id="cv">
+        <button type="submit"> Submit</button>
+    </form>
+    <div id="result">
+        <p>Results will appear here</p>
+    </div>
+   </main>
+    <script src="script.js"></script>
+</body>
+</html>
