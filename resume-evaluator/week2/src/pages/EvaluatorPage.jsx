@@ -13,13 +13,21 @@ export default function EvaluatorPage() {
     <main>
       <section className="form-section">
         <h2>Evaluate a Resume</h2>
-        {/* Build your form here */}
+        <form method="post" id="form">
+          <label for="job"> job description</label>
+          <textarea rows="2" cols="10" name="job" id="job"></textarea>
+          <label for="prompt">Custom Prompt</label>
+          <textarea rows="2" cols="60" name="prompt" id="prompt"></textarea>
+          <label for="cv">Upload your CV</label>
+          <input type="file" accept=".pdf" name="cv" id="cv"></input>
+          <button type="submit"> Submit</button>
+        </form>
       </section>
 
       <section className="results-section">
         <h2>Results</h2>
         <div id="results">
-          {/* Render results here based on status */}
+          <p>Results will appear here</p>
         </div>
       </section>
     </main>

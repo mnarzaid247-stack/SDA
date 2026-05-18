@@ -1,10 +1,13 @@
-// TODO Day 1: build the header with the app name and Login/Register links
 // TODO Day 4: replace <a href> with <Link to> from react-router-dom
 
-export default function Header() {
+export default function Header({title}) {
   return (
+    <>
     <header>
-      {/* Build your header content here */}
+      <h1>{title}</h1>
+      <a href='#'>Login </a>
+      <a href='#'>Register </a>
     </header>
+    </>
   )
 }
