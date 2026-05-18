@@ -7,7 +7,7 @@ import EvaluatorPage from './pages/EvaluatorPage'
 export default function App() {
   return (
     <div>
-      <Header title={"Resume Evaluator"}/>
+      <Header title="Resume Evaluator"/>
       <EvaluatorPage/>
     </div>
   )

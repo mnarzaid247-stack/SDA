@@ -4,7 +4,7 @@ export default function Header({title}) {
   return (
     <>
     <header>
-      <h1>{title}</h1>
+      <h1>{title.toUpperCase()}</h1>
       <a href='#'>Login </a>
       <a href='#'>Register </a>
     </header>
