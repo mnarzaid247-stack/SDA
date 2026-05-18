@@ -1,5 +1,3 @@
-// TODO Day 1: convert your Stage 1 form HTML to JSX
-//             (remember: class → className, self-closing tags need />)
 // TODO Day 2: add useState for jobDescription, prompt, file, status
 //             make the textareas controlled inputs
 // TODO Day 3: add errorMessage and result state
