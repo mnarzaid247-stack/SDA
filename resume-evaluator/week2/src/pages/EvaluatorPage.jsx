@@ -1,5 +1,3 @@
-// TODO Day 2: add useState for jobDescription, prompt, file, status
-//             make the textareas controlled inputs
 // TODO Day 3: add errorMessage and result state
 //             complete the handleSubmit function with validation and simulated response
 //             add conditional rendering to the results area
