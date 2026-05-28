@@ -1,13 +1,12 @@
-// TODO Day 4: replace <a href> with <Link to> from react-router-dom
+import { Link } from 'react-router-dom'
 
-export default function Header({title}) {
+export default function Header({ title }) {
   return (
-    <>
     <header>
       <h1>{title.toUpperCase()}</h1>
-      <a href='#'>Login </a>
-      <a href='#'>Register </a>
+
+      <Link to="/login">Login</Link>
+      <Link to="/register">Register</Link>
     </header>
-    </>
   )
 }
