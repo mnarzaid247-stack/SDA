@@ -28,7 +28,6 @@ export default function EvaluatorPage() {
             value={jobDescription}
             onChange={(e) => setJobDescription(e.target.value)}
           ></textarea>
-
           <label htmlFor="prompt">Custom Prompt</label>
           <textarea
             rows="2"
@@ -38,7 +37,6 @@ export default function EvaluatorPage() {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
           ></textarea>
-
           <label htmlFor="cv">Upload your CV</label>
           <input
             type="file"
@@ -47,23 +45,18 @@ export default function EvaluatorPage() {
             id="cv"
             onChange={(e) => setFile(e.target.files[0] || null)}
           />
-
           <button type="submit" disabled={status === 'loading'}>
             Submit
           </button>
         </form>
       </section>
-
       <section className="results-section">
         <h2>Results</h2>
 
         <div id="results">
           {status === 'idle' && <p>Results will appear here</p>}
-
           {status === 'loading' && <p>Evaluating...</p>}
-
           {status === 'error' && <p className="error">{errorMessage}</p>}
-
           {status === 'success' && <p>{result}</p>}
         </div>
       </section>

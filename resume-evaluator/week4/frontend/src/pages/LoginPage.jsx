@@ -14,7 +14,6 @@ export default function LoginPage() {
     <main className="auth-page">
       <div className="auth-card">
         <h2>Login</h2>
-
         <form onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
           <input
@@ -23,7 +22,6 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -31,10 +29,8 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
           <button type="submit">Login</button>
         </form>
-
         <p>
           Don't have an account? <Link to="/register">Register</Link>
         </p>

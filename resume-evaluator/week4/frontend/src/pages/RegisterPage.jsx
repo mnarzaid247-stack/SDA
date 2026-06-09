@@ -13,7 +13,6 @@ export default function RegisterPage() {
       console.log('Passwords do not match')
       return
     }
-
     console.log({
       email,
       password,
@@ -34,7 +33,6 @@ export default function RegisterPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -42,7 +40,6 @@ export default function RegisterPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
             type="password"
@@ -50,10 +47,8 @@ export default function RegisterPage() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-
           <button type="submit">Register</button>
         </form>
-
         <p>
           Already have an account? <Link to="/login">Login</Link>
         </p>

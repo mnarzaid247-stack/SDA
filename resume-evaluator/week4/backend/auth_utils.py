@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-
 from fastapi import Depends, HTTPException, status
 from sqlmodel import Session, select
 from database import get_session
@@ -26,15 +25,10 @@ def verify_password(plain: str, hashed: str) -> bool:
     is_correct = pwd_context.verify(plain, hashed)
     return is_correct
 
-
 def create_access_token(email: str) -> str:
     """Create a signed JWT containing the user's email and an expiry time."""
-    payload = {
-        "sub": email,
-        "exp": datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    }
+    payload = {"sub": email, "exp": datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)}
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
-
 
 def get_current_user(token: str = Depends(oauth2_scheme)) -> str:
     """
@@ -46,29 +40,17 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> str:
         email = payload.get("sub")
         if email is None:
             raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid token"
-            )
+                status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
         return email
     except JWTError:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid or expired token"
-        )
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or expired token")
     
 
-def require_admin(
-    current_user: str = Depends(get_current_user),
-    session: Session = Depends(get_session)
-):
-    user = session.exec(
-        select(User).where(User.email == current_user)
-    ).first()
+def require_admin(current_user: str = Depends(get_current_user), session: Session = Depends(get_session)):
+    user = session.exec(select(User).where(User.email == current_user)).first()
 
     if not user or user.role != "admin":
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Admin access required"
-        )
-
+            status_code=status.HTTP_403_FORBIDDEN, detail="Admin access required")
     return user

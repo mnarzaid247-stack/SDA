@@ -8,7 +8,6 @@ export default function App() {
   return (
     <div>
       <Header title="Resume Evaluator" />
-
       <Routes>
         <Route path="/" element={<EvaluatorPage />} />
         <Route path="/login" element={<LoginPage />} />
