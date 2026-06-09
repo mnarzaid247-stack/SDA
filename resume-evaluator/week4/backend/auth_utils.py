@@ -1,6 +1,9 @@
 from datetime import datetime, timedelta
 
 from fastapi import Depends, HTTPException, status
+from sqlmodel import Session, select
+from database import get_session
+from models import User
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
@@ -52,3 +55,20 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> str:
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired token"
         )
+    
+
+def require_admin(
+    current_user: str = Depends(get_current_user),
+    session: Session = Depends(get_session)
+):
+    user = session.exec(
+        select(User).where(User.email == current_user)
+    ).first()
+
+    if not user or user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin access required"
+        )
+
+    return user

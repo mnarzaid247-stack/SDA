@@ -3,3 +3,4 @@ uvicorn
 pydantic[email]
 python-jose[cryptography]
 passlib[bcrypt]
+sqlmodel
