@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from schemas import RegisterRequest, LoginRequest, UserResponse, TokenResponse, EvaluateRequest, EvaluateResponse
+from schemas import RegisterRequest, LoginRequest, UserResponse, TokenResponse
 from sqlmodel import Session, select
 from database import get_session
 from models import User
