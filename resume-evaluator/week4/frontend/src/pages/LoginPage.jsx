@@ -1,14 +1,28 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import client from '../api/client'
+import { useAuth } from '../context/AuthContext'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  function handleSubmit(e) {
+  const { login } = useAuth()
+  const navigate = useNavigate()
+  async function handleSubmit(e) {
     e.preventDefault()
-    console.log({ email, password })
+    try {
+    const response = await client.post('/auth/login', {
+      email,
+      password,
+    })
+
+    login(email, response.data.access_token)
+    navigate('/')
+  } catch (error) {
+    console.error(error)
+    alert('Login failed')
   }
+}
 
   return (
     <main className="auth-page">

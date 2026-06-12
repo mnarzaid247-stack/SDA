@@ -1,23 +1,42 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import client from '../api/client'
+import { useAuth } from '../context/AuthContext'
+
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [error, setError] = useState('')
 
-  function handleSubmit(e) {
+  const { login } = useAuth()
+  const navigate = useNavigate()
+
+  async function handleSubmit(e) {
     e.preventDefault()
 
     if (password !== confirmPassword) {
       console.log('Passwords do not match')
       return
     }
-    console.log({
-      email,
-      password,
-      confirmPassword,
-    })
+    try {
+  await client.post('/auth/register', {
+    email,
+    password,
+  })
+
+  const response = await client.post('/auth/login', {
+    email,
+    password,
+  })
+
+  login(email, response.data.access_token)
+  navigate('/')
+} catch (error) {
+  console.error(error)
+  setError('Registration failed')
+}
   }
 
   return (
@@ -49,6 +68,7 @@ export default function RegisterPage() {
           />
           <button type="submit">Register</button>
         </form>
+        {error && <p>{error}</p>}
         <p>
           Already have an account? <Link to="/login">Login</Link>
         </p>

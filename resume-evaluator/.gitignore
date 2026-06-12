@@ -6,7 +6,6 @@ __pycache__/
 venv/
 .venv/
 
-red_teaming.db
 
 *.pyo
 *.pyd
@@ -15,6 +14,6 @@ red_teaming.db
 *.db
 *.sqlite
 *.sqlite3
-
+node_modules/
 .DS_Store
 .vscode/
