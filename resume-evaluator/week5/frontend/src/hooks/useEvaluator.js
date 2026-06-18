@@ -10,38 +10,42 @@ export default function useEvaluator() {
   const [result, setResult] = useState(null)
 
   async function handleSubmit(e) {
-  e.preventDefault()
+    e.preventDefault()
 
-  if (!jobDescription) {
-    setStatus('error')
-    setErrorMessage('Please enter a job description.')
-    return
+    if (!jobDescription.trim()) {
+      setStatus('error')
+      setErrorMessage('Please enter a job description.')
+      return
+    }
+
+    if (!file) {
+      setStatus('error')
+      setErrorMessage('Please upload your CV.')
+      return
+    }
+
+    setStatus('loading')
+    setErrorMessage(null)
+    setResult(null)
+
+    try {
+      const formData = new FormData()
+      formData.append('job_description', jobDescription)
+      formData.append('prompt', prompt)
+      formData.append('resume', file)
+
+      const response = await client.post('/evaluate', formData)
+
+      setStatus('success')
+      setResult(response.data.result)
+    } catch (error) {
+      console.error(error)
+      setStatus('error')
+      setErrorMessage(
+        error.response?.data?.detail || 'Evaluation failed.'
+      )
+    }
   }
-
-  if (!file) {
-    setStatus('error')
-    setErrorMessage('Please upload your CV.')
-    return
-  }
-
-  setStatus('loading')
-  setErrorMessage(null)
-  setResult(null)
-
-  try {
-    const response = await client.post('/evaluate', {
-      job_description: jobDescription,
-      prompt: prompt,
-    })
-
-    setStatus('success')
-    setResult(response.data.result)
-  } catch (error) {
-    console.error(error)
-    setStatus('error')
-    setErrorMessage('Evaluation failed.')
-  }
-}
 
   return {
     jobDescription,
